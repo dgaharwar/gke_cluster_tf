@@ -4,21 +4,16 @@ variable "project" {
   default     = "silicon-coder-316218"
 }
 
-variable "credentials" {
-  type = string
-  default = {
-  "type": "service_account",
-  "project_id": "silicon-coder-316218",
-  "private_key_id": "863b318904f6de6e35339e2684c173a328a2a7e1",
-  "private_key": "-----BEGIN PRIVATE KEY-----\nMIIEvAIBADANBgkqhkiG9w0BAQEFAASCBKYwggSiAgEAAoIBAQC2conc6RujIO6f\nHvEf4Oqk8fTRXLOS5tvs2BoOKSFEDfk2PZMrtT3EDrGHnksKmdg5ysfQOC7n3s6F\nTYGT0AxznyAMGiwjB6wYv5cs7rgRQGVrAlo77v0t2glLQBpzPuZsAnzT+glxO2lm\niSw7jeOIpYtdoof+M/Dy0+y1YuS4gTWA1wA2g63TmYvoC9XSkNcgfe7caU2+v5GA\nW2scxlTSl+9ZMLxTty8lbQXxrzkpes0JZxOTfZBVTPhTqj4nSxtYys58jjhwJxf/\nUNTvsZDLC26s8FFRT+0Hq8vj8iqQ0g11NWNk751IX7dQAAN2AuTauXcnnVFc230R\n2WuqT0vDAgMBAAECggEANOGbAvxP5ebwMw/BXPeQm1GEH8DKTcx7Nzllx+/08+hG\n8QlE5HjKV87YdxIS9xYjXZDgfIIkWlGys2GFKsY1LbgUDl3xqA+buqqhk0T39gwf\nuTX72H5LROR7KCQC5p93IxxPeRNydC7/vFgLCZH1PtCYxgGLgEsmzgNOCz8IQ0+2\n3FmnStndtZn8YrYxwEqmProdSG89ys2R11RRWQM93gSrnDaGhyEr3jUP8VwjWTYo\n/rfJ7cfEhQkX64sbQ52vt+WroxpcB7c6Pg46xDRImH95Ec5I0dmbry1d1kMQQy8T\nFqnzcA5VQgeT2xe4sIeXxob+8cz5s2gOauBcxUmiHQKBgQDZ+lfBpVzpXHD2UQ1F\nBSwmyHDVx3qoBopStRqNBAERIy+lOQz3RNXY7WGywjDHplmUObromjMEb224eSf2\nUdVm9x81pqpt3vCuzBUFZRpd7Qh+DGhuiptsKcYL+R8IxviqVZyWdJCCxg79iw/9\nZWCmEeniskQdWMPgRpmlUZ7vvwKBgQDWRZsPCm1+R0CZrWl/l7B2S0G7VgFGrF0Z\n6LtetzJf8w3Wd/QGUVvlQePZYe/Ql/cELBRjqdC+wydzz9JGcw8dN4560Z4gpJ2j\nPAcVt2MX0nRCZO5o1DCOvMVG5mKsgmWfuA9sMfJCk+C/co8kMGwCm8mmhShscfxn\nsHCZetqk/QKBgDYdTlgGw5AzoN+ls5Ok+xcNv+VyxmKcbQ6nY1YK3nDwuU1dYnio\noCZgmFaWmyGVjLudsWc5kNzTBPw9J8yg+Ee9pgPdwoXQSRQ8GiPiu68Bv4/7aJm4\n02kA3efvCuNU8jrnUh6QBahRnzsWoPuZhWr1G4lqFDrs5IPzQwWlw71lAoGAWhjY\nk2F6GuARDM17D9iTrZoFYKVQUgxF9ZADwVbcyrWjuuujY0iwkFy9Vvm0YgyUJF/4\njtOn356lpy/aph7ZWxqyQXiEugsd8bZa8Em1VB39HrHcAZ4/cLV1alOTaCBIZPl7\nGq6BxHbzyOx9veTSdeJVzzwsfDUNwffR0Od0qm0CgYBPjsaxFu7HZLh1hBb1b55M\n7XJ2mqdbRBgzmzgak14OYaa0Xdkcg3h6ijM6+mxGZy1UrL6H3AkKbSiTefrZpANg\ncQcI0EWZRTlzfkjSDwpxLtR8AQY4Cb6h+vzHtkRKEnLrxMvLqMohVVpRZIy2Uvs3\nidsiYEjxM7mSnIHUwTirhA==\n-----END PRIVATE KEY-----\n",
-  "client_email": "dgaharwar@silicon-coder-316218.iam.gserviceaccount.com",
-  "client_id": "113372815337913212051",
-  "auth_uri": "https://accounts.google.com/o/oauth2/auth",
-  "token_uri": "https://oauth2.googleapis.com/token",
-  "auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
-  "client_x509_cert_url": "https://www.googleapis.com/robot/v1/metadata/x509/dgaharwar%40silicon-coder-316218.iam.gserviceaccount.com"
-}
+variable "gcp_private_key" { 
+  type = string 
+} 
 
+variable "gcp_cred" { 
+  type = map 
+} 
+
+locals {
+  credential = merge(var.gcp_cred, {private_key = "${var.gcp_private_key}"}) 
 }
 
 variable "location" {
