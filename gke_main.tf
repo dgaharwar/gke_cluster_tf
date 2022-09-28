@@ -25,9 +25,9 @@ terraform {
 }
 
 provider "google" {
- credentials = var.credentials
   project = var.project
   region  = var.region
+  credentials = jsonencode(local.credential)
   scopes = [
     # Default scopes
     "https://www.googleapis.com/auth/compute",
@@ -43,7 +43,6 @@ provider "google" {
 provider "google-beta" {
   project = var.project
   region  = var.region
-
   scopes = [
     # Default scopes
     "https://www.googleapis.com/auth/compute",
